@@ -21,6 +21,8 @@ public class Relaciones02Extra {
         
         cs.mostrarCine(cine);
         
+//        cine.toString();
+        cs.menu(cine);
         
     }
 

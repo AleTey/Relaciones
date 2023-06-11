@@ -2,15 +2,18 @@
 package Service;
 
 import identidad.Pelicula;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.Scanner;
 
 public class PeliculaService {
     
+    Scanner sc = new Scanner(System.in);
+    ArrayList<Pelicula> listaPeliculas = new ArrayList();
     
+    public void listadoPeliculas() {
     
-    public LinkedHashSet listadoPeliculas() {
-    
-        LinkedHashSet<Pelicula> listaPeliculas = new LinkedHashSet();
+        
         //LinkedHashSet listaPeliculas = null;
         
         Pelicula transformer = new Pelicula("TRANSFORMERS: EL DESPERTAR DE LAS BESTIAS", 127, 13, "Seven Caple Jr.");
@@ -25,6 +28,35 @@ public class PeliculaService {
         listaPeliculas.add(guardianesDeLaGalaxia);
         listaPeliculas.add(marioBross);
                 
-        return listaPeliculas;
+        
     }
+    
+    public Pelicula eleccionPelicula() {
+    
+        int contLista = 1;
+        
+        listadoPeliculas();
+        for (Pelicula pelicula : listaPeliculas ) {
+            
+            System.out.println("------ OPCION: " + contLista + " -------");
+            System.out.println(pelicula.getTitulo());
+            System.out.println("--------------");
+            System.out.println("Duracion: " + pelicula.getDuracion());
+            System.out.println("Director: " + pelicula.getDirector());
+            System.out.println("Clasificacion: Mayores de " + pelicula.getEdadMin());
+            System.out.println("");
+            System.out.println("");
+            contLista ++;
+        }
+        System.out.println("");
+        System.out.println("");
+        System.out.println("Ingrece la opcion deseada");
+        int option = sc.nextInt();
+        
+        Pelicula peliculaElegida = listaPeliculas.get(option - 1);
+        
+        return peliculaElegida;
+    }
+    
+    
 }

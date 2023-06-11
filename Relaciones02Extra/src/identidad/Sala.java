@@ -4,6 +4,8 @@ package identidad;
 public class Sala {
     
     private int num;
+    private int fil;
+    private int col;
     private String[][] asientos;
     private Pelicula pelicula;
     private int precio;
@@ -11,8 +13,10 @@ public class Sala {
     public Sala() {
     }
 
-    public Sala(int num, String[][] asientos) {
+    public Sala(int num, int fil, int col, String[][] asientos) {
         this.num = num;
+        this.fil = fil;
+        this.col = col;
         this.asientos = asientos;
     }
     
@@ -30,6 +34,22 @@ public class Sala {
 
     public void setNum(int num) {
         this.num = num;
+    }
+
+    public int getFil() {
+        return fil;
+    }
+
+    public void setFil(int fil) {
+        this.fil = fil;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
     }
     
     
@@ -60,8 +80,15 @@ public class Sala {
 
     @Override
     public String toString() {
-        return "Sala{" + "asientos=" + asientos + ", pelicula=" + pelicula + ", precio=" + precio + '}';
+        
+       
+        
+        return "Sala{" + "num=" + num + ", asientos=" + asientos + ", pelicula=" + pelicula + ", precio=" + precio + '}';
+        
     }
+
+  
+    
     
     
     

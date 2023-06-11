@@ -7,6 +7,8 @@ public class Cine {
    
     private ArrayList<Sala> salas;
 
+    
+    
     public Cine() {
     }
 
@@ -26,6 +28,8 @@ public class Cine {
     public String toString() {
         return "Cine{" + "salas=" + salas + '}';
     }
+
+    
     
     
 }
