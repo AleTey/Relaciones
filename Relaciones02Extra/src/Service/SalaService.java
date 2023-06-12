@@ -3,6 +3,7 @@ package Service;
 
 import identidad.Cine;
 import identidad.Sala;
+import java.util.Random;
 import java.util.Scanner;
 
 public class SalaService {
@@ -72,5 +73,34 @@ public class SalaService {
         int precioEntrada = sc.nextInt();
         
         return precioEntrada;
+                
+    }
+    
+    public void seleccionadorDeAsientos(Cine cine, int nroSala) {
+    
+    Random random = new Random();
+    int nroFila = random.nextInt(cine.getSalas().get(nroSala - 1).getFil());
+    int nroCol = random.nextInt(cine.getSalas().get(nroSala - 1).getCol());
+    
+    String asiento = cine.getSalas().get(nroSala - 1).getAsientos()[nroFila][nroCol].substring(2, 5);
+        System.out.println(asiento);
+//        System.out.println(asiento.substring(2, 4));
+        boolean igual = false;
+    if (asiento.equalsIgnoreCase("(_)")) {
+        igual = true;
+        System.out.println(asiento);
+        String ubicacionAsiento = cine.getSalas().get(nroSala - 1).getAsientos()[nroFila][nroCol].substring(0, 2);
+        String asientoOcupado = "(X)";
+        System.out.println(ubicacionAsiento);
+        System.out.println(asientoOcupado);
+        System.out.println(ubicacionAsiento.concat(asientoOcupado));
+        ubicacionAsiento.concat(asientoOcupado);
+        
+//        cine.getSalas().get(nroSala).getAsientos()[nroFila][nroCol].substring(3).replace("_", "X");
+        System.out.println(cine.getSalas().get(nroSala - 1).getAsientos()[nroFila][nroCol]);
+    } 
+        System.out.println(igual);
+//    if (cine.getSalas().get(nroSala).getAsientos()[nroFila][nroCol])
+    
     }
 }

@@ -1,9 +1,11 @@
 package Service;
 
 import identidad.Cine;
+import identidad.Espectador;
 import identidad.Sala;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
 
 public class CineService {
@@ -11,6 +13,7 @@ public class CineService {
     Scanner sc = new Scanner(System.in);
     SalaService ss = new SalaService();
     PeliculaService ps = new PeliculaService();
+    EspectadorService es = new EspectadorService();
 
     public Cine armarCine() {
 
@@ -57,7 +60,7 @@ public class CineService {
 
             switch (option) {
                 case 1:
-
+                    ventaTiket(cine);
                     break;
 
                 case 2:
@@ -124,6 +127,63 @@ public class CineService {
                 cine.getSalas().get(option - 1).setPrecio(ss.cambiarPrecioTiket());
                 break;
         }
+    }
+
+    public void ventaTiket(Cine cine) {
+
+        LinkedHashSet<Espectador> filaVenta = new LinkedHashSet();
+        filaVenta = es.listaEspectadores();
+        Iterator<Espectador> it = filaVenta.iterator();
+
+        boolean salir = false;
+        while (it.hasNext() && !salir) {
+            Espectador espec = it.next();
+            //MUESTRA CARTELERA
+            for (Sala sala : cine.getSalas()) {
+                System.out.println("----------------------");
+                System.out.println("SALA " + sala.getNum());
+                System.out.println(sala.getPelicula().getTitulo());
+                System.out.println("Duracion: " + sala.getPelicula().getDuracion());
+                System.out.println("Director: " + sala.getPelicula().getDirector());
+                System.out.println("Para mayores de: " + sala.getPelicula().getEdadMin());
+                System.out.println("Precio: " + sala.getPrecio());
+
+                
+            }
+            // MUESTRA INFO ESPECTADOR
+            System.out.println("                                                               nombre: " + espec.getNombre());
+            System.out.println("                                                               edad: " + espec.getEdad());
+            System.out.println("                                                               dineroDisponible" + espec.getDineroDsp());
+
+            System.out.println("");
+            System.out.println("Ingrese numero de sala elegida");
+            int peliculaSeleccionada = sc.nextInt();
+            if (espec.getEdad() >= cine.getSalas().get(peliculaSeleccionada - 1).getPelicula().getEdadMin() && espec.getDineroDsp() >= cine.getSalas().get(peliculaSeleccionada - 1).getPrecio()) {
+                
+                //RESTA DINERO ESPECTADOR
+//                espec.setDineroDsp(espec.getDineroDsp() - cine.getSalas().get(peliculaSeleccionada - 1).getPrecio());
+                //PRUEBA QUE SE RESTE EL DINERO AL ESPECTADOR
+                                
+                //BUSCADOR DE ASIENTOS!!!!
+                ss.seleccionadorDeAsientos(cine, peliculaSeleccionada);
+                        
+                
+                ///PRUEBA la sala seleccionada es la correcta?
+//                System.out.println("peliculaSELECCIONADA: " + peliculaSeleccionada);
+//                System.out.println(cine.getSalas().get(peliculaSeleccionada - 1));
+                System.out.println("VENDIDA");
+            } else {
+                System.out.println("Adioooosss");
+            }
+
+            System.out.println("Seguir atendiendo? S/N");
+            String rta = sc.nextLine();
+            rta = sc.nextLine();
+            if (rta.equalsIgnoreCase("n")) {
+                salir = true;
+            }
+        }
+
     }
 
     public void mostrarCine(Cine cine) {
