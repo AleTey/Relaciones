@@ -1,6 +1,8 @@
 
 package identidad;
 
+import java.util.Arrays;
+
 public class Sala {
     
     private int num;
@@ -9,15 +11,17 @@ public class Sala {
     private String[][] asientos;
     private Pelicula pelicula;
     private int precio;
+    private int asientosLibre;
 
     public Sala() {
     }
 
-    public Sala(int num, int fil, int col, String[][] asientos) {
+    public Sala(int num, int fil, int col, String[][] asientos, int asientosLibres) {
         this.num = num;
         this.fil = fil;
         this.col = col;
         this.asientos = asientos;
+        this.asientosLibre = asientosLibres;
     }
     
 
@@ -78,14 +82,34 @@ public class Sala {
         this.precio = precio;
     }
 
+    public int getAsientosLibre() {
+        return asientosLibre;
+    }
+
+    public void setAsientosLibre(int asientosLibre) {
+        this.asientosLibre = asientosLibre;
+    }
+    
+
+   public void setAsiento(int fila, int col, String valor) {
+       this.asientos[fila][col] = valor;
+       
+   }
+//     public String[][] setAsientos() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+    
+
     @Override
     public String toString() {
         
        
         
-        return "Sala{" + "num=" + num + ", asientos=" + asientos + ", pelicula=" + pelicula + ", precio=" + precio + '}';
+        return "Sala{" + "num=" + num + ", asientos=" + Arrays.toString(asientos) + ", pelicula=" + pelicula + ", precio=" + precio + '}';
         
     }
+
+   
 
   
     

@@ -20,6 +20,7 @@ public class Relaciones02Extra {
         Cine cine = cs.armarCine();
         
         cs.mostrarCine(cine);
+       
         
 //        cine.toString();
         cs.menu(cine);

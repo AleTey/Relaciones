@@ -134,7 +134,7 @@ public class CineService {
         LinkedHashSet<Espectador> filaVenta = new LinkedHashSet();
         filaVenta = es.listaEspectadores();
         Iterator<Espectador> it = filaVenta.iterator();
-
+        
         boolean salir = false;
         while (it.hasNext() && !salir) {
             Espectador espec = it.next();
@@ -158,14 +158,23 @@ public class CineService {
             System.out.println("");
             System.out.println("Ingrese numero de sala elegida");
             int peliculaSeleccionada = sc.nextInt();
-            if (espec.getEdad() >= cine.getSalas().get(peliculaSeleccionada - 1).getPelicula().getEdadMin() && espec.getDineroDsp() >= cine.getSalas().get(peliculaSeleccionada - 1).getPrecio()) {
+            peliculaSeleccionada = peliculaSeleccionada - 1;
+            System.out.println("Asientos disponibles en la sala: " + cine.getSalas().get(peliculaSeleccionada).getAsientosLibre());
+            
+            if (espec.getEdad() >= cine.getSalas().get(peliculaSeleccionada).getPelicula().getEdadMin() && espec.getDineroDsp() >= cine.getSalas().get(peliculaSeleccionada).getPrecio() && cine.getSalas().get(peliculaSeleccionada).getAsientosLibre() > 0) {
                 
                 //RESTA DINERO ESPECTADOR
 //                espec.setDineroDsp(espec.getDineroDsp() - cine.getSalas().get(peliculaSeleccionada - 1).getPrecio());
                 //PRUEBA QUE SE RESTE EL DINERO AL ESPECTADOR
                                 
                 //BUSCADOR DE ASIENTOS!!!!
-                ss.seleccionadorDeAsientos(cine, peliculaSeleccionada);
+                String ubicacion = ss.asientoAleatorio(cine, peliculaSeleccionada);
+                
+                System.out.println("Ubicacion: " + ubicacion);
+//                String filaAsignada = ubicacion.substring(0, 1);
+//                String colAsignada = ubicacion.substring(1, 2);
+                
+                
                         
                 
                 ///PRUEBA la sala seleccionada es la correcta?
